@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats des métadonnées</title>
+</head>
+<body>
+    <h1>Métadonnées extraites pour {{ metadata['name'] }}</h1>
+    {% if metadata %}
+        <ul>
+            <li><strong>Taille du fichier :</strong> {{ metadata['size'] }} octets</li>
+            {% if metadata['image_format'] %}
+                <li><strong>Format image :</strong> {{ metadata['image_format'] }}</li>
+                <li><strong>Dimensions :</strong> {{ metadata['image_size'][0] }}x{{ metadata['image_size'][1] }} pixels</li>
+                <li><strong>Mode :</strong> {{ metadata['image_mode'] }}</li>
+                {% if metadata['location'] %}
+                    <li><strong>Localisation GPS :</strong> {{ metadata['location'] }}</li>
+                {% endif %}
+            {% endif %}
+            {% if metadata['video_duration'] %}
+                <li><strong>Durée vidéo :</strong> {{ metadata['video_duration'] }} secondes</li>
+                <li><strong>FPS :</strong> {{ metadata['video_fps'] }}</li>
+            {% endif %}
+            {% if metadata['pdf_num_pages'] %}
+                <li><strong>Nombre de pages :</strong> {{ metadata['pdf_num_pages'] }}</li>
+                <li><strong>Auteur :</strong> {{ metadata['pdf_author'] }}</li>
+            {% endif %}
+        </ul>
+    {% else %}
+        <p>Aucune métadonnée trouvée pour ce fichier.</p>
+    {% endif %}
+    <a href="/">Retour à l'accueil</a>
+</body>
+</html>
